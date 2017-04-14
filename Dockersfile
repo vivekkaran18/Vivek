@@ -1,0 +1,19 @@
+FROM ubuntu:16.04
+
+# Update
+RUN apk add --update python py-pip
+
+# Install app dependencies
+RUN pip install Flask
+
+# Install app dependencies
+RUN pip install -r requirements.txt
+
+# Bundle app source
+COPY web-hello.py /src/web-hello.py
+
+# Set the default directory where CMD will execute
+WORKDIR /hello
+
+EXPOSE  8080
+CMD ["python", "/src/web-hello.py", "-p 8080"]
